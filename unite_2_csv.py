@@ -19,7 +19,7 @@ class Unite2CSV:
         get_data_from_csv_2: List[str], 
         ignore_these_columns: List[str]
     ) -> None:
-        self.date_formats = ['%Y-%m-%d', '%m/%d/%y']
+        self.date_formats = ['%Y-%m-%d', '%m/%d/%y', '%m/%d/%Y']
         self.csv_1 = self.read_data(csv_1, csv_1_primary_field)
         self.csv_2 = self.read_data(csv_2, csv_2_primary_field)
         self.primary_field_1 = csv_1_primary_field
