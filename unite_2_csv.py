@@ -47,8 +47,8 @@ class Unite2CSV:
                 
                 if not isinstance(d[field], datetime):
                     print(f"File {csv_file}. Row {index + 2}:")
-                    print(d)
-                    raise ValueError(f'"{d[field]}"" Field was unable to convert to date!')
+                    print("Values:", d)
+                    print(f'WARNING: value "{d[field]}"" for {field} column was unable to convert to date!')
 
             return return_data
 
