@@ -33,7 +33,7 @@ class Unite2CSV:
         with open(csv_file) as f:
             data = csv.DictReader(f, delimiter=',', quotechar='"')
 
-            for d in data:
+            for index, d in enumerate(data):
                 if isinstance(d[field], datetime):
                     continue
 
@@ -44,9 +44,11 @@ class Unite2CSV:
                         break
                     except ValueError:
                         pass
-
+                
                 if not isinstance(d[field], datetime):
-                    raise ValueError('Field was unable to convert to date!')
+                    print(f"File {csv_file}. Row {index + 2}:")
+                    print(d)
+                    raise ValueError(f'"{d[field]}"" Field was unable to convert to date!')
 
             return return_data
 
@@ -255,12 +257,12 @@ if __name__ == "__main__":
     import time
     start = time.time()
     unite2csv = Unite2CSV(
-        csv_1='WASDE (input X).csv',
+        csv_1='Drought3.csv',
         # csv_1='WASDE (input X) copy.csv',
-        csv_2='WheatPriceData (input Y).csv',
+        csv_2='WheatDec1.csv',
         csv_1_primary_field='Report date',
         csv_2_primary_field='Date',
-        time_series_by_column=['Category', 'Units', 'Attribute'],
+        time_series_by_column=['State'],
         get_data_from_csv_2=['1 day', '-1 day'],#, '1 month', '-1 month', '1 year', '-1 year'],
         ignore_these_columns = ['', 'Ingestion timestamp', 'Market year start', 'Market year end']
     )
